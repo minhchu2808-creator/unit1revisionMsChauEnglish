@@ -179,7 +179,7 @@ function renderHome(){
   else if(a.st==="demo") why=`<div class="note">Bản thử cho cô: làm được tất cả các phần, kết quả ghi vào Sheet dưới lớp <b>${cls().key}</b>, xoá lúc nào cũng được.</div>`;
   else if(a.st==="nograde") why=`<div class="note">Cô chưa có điểm Unit 1 của con. Con làm cả ${need.length} phần nhé.</div>`;
   else if(!need.length) why=`<div class="note">Bài kiểm tra Unit 1 con làm tốt, không có phần nào cần ôn lại. Con có thể luyện thêm ở dưới nếu thích.</div>`;
-  const taskBtn=(x,opt)=>{ const st=secStatus(x.key); const w=a.wrong&&a.wrong[x.key]; const why=(!opt&&Array.isArray(w))?`Unit Test: sai ${w.length}/${SECMAX[x.key]} câu`:(opt?"Không bắt buộc":"Cô giao");
+  const taskBtn=(x,opt)=>{ const st=secStatus(x.key); const w=a.wrong&&a.wrong[x.key]; const why=opt?"Không bắt buộc":"Cô giao";
     return `<button class="task${opt?" opt-list":""}" onclick="openSec('${x.key}')"><span class="ic">${x.key}</span><span class="tt"><b>${esc(x.name)}</b><span>${esc(x.vi)} · ${why}</span></span><span class="st ${st.cls}">${st.txt}</span></button>`; };
   app.innerHTML=`<h1>Chào ${esc(s.name.split(" ").slice(-1)[0])}!</h1><p class="sub">${esc(T.name)} · cô Lương Minh Châu</p>${why}
   ${need.length?`<h2>Bài cô giao</h2>${need.map(x=>taskBtn(x,false)).join("")}`:""}

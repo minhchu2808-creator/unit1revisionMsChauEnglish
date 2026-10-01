@@ -190,11 +190,11 @@ function renderHome(){
   else if(a.st==="demo") why=`<div class="note">Bản thử cho cô: làm được tất cả các phần, kết quả ghi vào Sheet dưới lớp <b>${cls().key}</b>, xoá lúc nào cũng được.</div>`;
   else if(a.st==="nograde") why=`<div class="note">Cô chưa có điểm Unit 1 của con. Con làm cả ${need.length} phần nhé.</div>`;
   else if(!need.length) why=`<div class="note">Bài kiểm tra Unit 1 con làm tốt, không có phần nào cần ôn lại. Con có thể luyện thêm ở dưới nếu thích.</div>`;
-  const taskBtn=(x,opt,mock)=>{ const st=secStatus(x.key); const pend=audioPending(x); const why=mock?"Đề thi thử":(opt?"Không bắt buộc":"Cô giao");
+  const taskBtn=(x,opt,mock)=>{ const st=secStatus(x.key); const pend=audioPending(x); const why=mock?"Đề ôn tập":(opt?"Không bắt buộc":"Cô giao");
     return `<button class="task${opt?" opt-list":""}" onclick="openSec('${x.key}')" ${pend?"disabled":""}><span class="ic">${x.key.replace(/^U2/,"")}</span><span class="tt"><b>${esc(x.name)}</b><span>${esc(x.vi)} · ${pend?"cô đang thu âm, sắp có":why}</span></span><span class="st ${pend?"":st.cls}">${pend?"Sắp có":st.txt}</span></button>`; };
   const T2=test2();
   app.innerHTML=`<h1>Chào ${esc(s.name.split(" ").slice(-1)[0])}!</h1><p class="sub">Lớp ${esc(who.cls)} · cô Lương Minh Châu</p>
-  ${T2?`<h2>${esc(T2.name)}</h2><div class="note" style="margin-bottom:10px">Đề thi thử cùng dạng với bài kiểm tra Unit 2. Con làm hết các phần, nộp xong xem ngay câu đúng, câu sai.</div>${T2.secs.map(x=>taskBtn(x,false,true)).join("")}`:""}
+  ${T2?`<h2>${esc(T2.name)}</h2><div class="note" style="margin-bottom:10px">Đề ôn tập Unit Test 2. Con làm hết các phần, nộp xong xem ngay câu đúng, câu sai.</div>${T2.secs.map(x=>taskBtn(x,false,true)).join("")}`:""}
   <h2 style="margin-top:28px">${esc(T.name)}</h2>${why}
   ${need.length?`<h3 style="font-size:16px;margin:12px 0 6px">Bài cô giao</h3>${need.map(x=>taskBtn(x,false)).join("")}`:""}
   ${extra.length?`<h2 style="color:var(--ink2)">Luyện thêm</h2>${extra.map(x=>taskBtn(x,true)).join("")}`:""}
